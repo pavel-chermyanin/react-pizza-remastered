@@ -15,15 +15,14 @@ body {
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
-}
 
-@media(max-width: 768px) {
-  .wrapper {
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
+  @media(max-width: 768px) {
+    width: calc(100vw - 30px);
+    margin: 15px auto;
   }
 }
+
+
 
 .content {
   padding: 40px 0;
@@ -36,6 +35,10 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
     grid-column-gap: 20px;
+
+    @media(max-width: 360px) {
+      display: block;
+    }
   }
 
   &__top {
@@ -138,28 +141,46 @@ body {
 
   &__item {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: 100%;
-    border-top: 1px solid $gray-line;
-    padding-top: 30px;
+    border-bottom: 1px solid $gray-line;
+    padding-bottom: 30px;
     margin-top: 30px;
+
+    @media(max-width: 700px) {
+      justify-content: space-around;
+    }
+
 
     &-img {
       display: flex;
       align-items: center;
       margin-right: 15px;
-      width: 10%;
 
       img {
         width: 80px;
         height: 80px;
       }
+
+      @media(max-width: 700px) {
+        width: 100%;
+        justify-content: center;
+        margin-right: 0;
+      }
+
     }
 
     &-info {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 40%;
+
+      @media(max-width: 700px) {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 20px;
+      }
 
       h3 {
         font-weight: bold;
@@ -178,7 +199,6 @@ body {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 13%;
 
       &-minus {
         svg {
@@ -190,6 +210,7 @@ body {
 
       b {
         font-size: 22px;
+        margin: 0 5px;
       }
     }
 
@@ -197,7 +218,6 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 33%;
 
       b {
         font-weight: bold;
@@ -210,11 +230,11 @@ body {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      width: 4%;
 
       .button {
         border-color: darken($color: $gray-line, $amount: 10);
       }
+
 
       svg {
         transform: rotate(45deg);
@@ -247,6 +267,11 @@ body {
       display: flex;
       justify-content: space-between;
 
+      @media(max-width:520px) {
+        flex-direction: column;
+        text-align: center;
+      }
+
       span {
         font-size: 22px;
 
@@ -262,6 +287,11 @@ body {
       display: flex;
       justify-content: space-between;
       margin-top: 40px;
+
+      @media(max-width:520px) {
+        flex-direction: column-reverse;
+        align-items: center;
+      }
 
       .go-back-btn {
         display: flex;
@@ -301,6 +331,10 @@ body {
         font-weight: 600;
         width: 210px;
         padding: 16px;
+
+        @media(max-width:520px) {
+          margin-bottom: 40px;
+        }
       }
     }
   }
@@ -342,6 +376,7 @@ body {
       font-size: 18px;
     }
   }
+
   @media(max-width: 460px) {
     h2 {
       font-size: 28px;

@@ -1,6 +1,7 @@
 @import '../variables';
 
 .categories {
+  overflow-x: auto;
   ul {
     display: flex;
 
@@ -30,11 +31,11 @@
   }
 }
 
-@media (max-width: 1150px) {
-  .categories {
-    overflow-x: scroll;
-  }
-}
+// @media (max-width: 1150px) {
+//   .categories {
+//     overflow-x: scroll;
+//   }
+// }
 
 @media(max-width: 768px) {
   .categories {
