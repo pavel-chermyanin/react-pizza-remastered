@@ -4,20 +4,31 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
+  @media(max-width: 550px) {
+    padding: 20px 0;
+  }
+
   .container {
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
 
-  @media(max-width: 550px) {
-    .container {
+    @media(max-width: 550px) {
       flex-direction: column;
+      align-items: stretch;
     }
   }
 
+
+
   &__logo {
     display: flex;
+
+    @media(max-width: 960px) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
 
     img {
       margin-right: 15px;
@@ -37,20 +48,11 @@
   }
 
   @media(max-width: 550px) {
-    & {
-      padding-bottom: 20px;
-    }
-    
-    &__logo {
-      margin-bottom: 30px;
-    }
-
     .header__cart {
-      align-self: flex-end;
+      padding-top: 20px;
+      align-self: center;
     }
   }
 
-  // @media(max-width: 550px) {
-  //   
-  // }
+
 }
