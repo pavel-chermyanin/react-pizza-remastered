@@ -4,7 +4,7 @@ import img from '../assets/img/pizza-logo.svg';
 import Search from "./Search";
 
 
-const Header = ({ searchValue, setSearchValue }) => {
+const Header = () => {
     return (
         <div className="header">
             <div className="container">
@@ -15,9 +15,7 @@ const Header = ({ searchValue, setSearchValue }) => {
                         <p>самая вкусная пицца во вселенной</p>
                     </div>
                 </NavLink>
-                <Search
-                    searchValue={searchValue}
-                    setSearchValue={setSearchValue} />
+                <Search />
                     
                 <div className="header__cart">
                     <NavLink to="/cart" className="button button--cart">
