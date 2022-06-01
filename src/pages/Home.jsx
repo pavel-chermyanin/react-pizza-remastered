@@ -1,6 +1,8 @@
 
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+
 
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
@@ -8,20 +10,21 @@ import Sort from '../components/Sort';
 import Preloader from '../components/PizzaBlock/Preloader';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
-import { setCategoryId } from '../redux/slices/filterSlice';
+import { setCategoryId, setPageCount } from '../redux/slices/filterSlice';
 
 
 const Home = () => {
     const categoryId = useSelector(state => state.filter.categoryId);
     const sortType = useSelector(state => state.filter.sort)
+    const currentPage = useSelector(state => state.filter.pageCount)
     const dispatch = useDispatch()
 
-    
-    const { searchValue} = React.useContext(SearchContext)
+
+    const { searchValue } = React.useContext(SearchContext)
 
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setLoading] = React.useState(true)
-    const [currentPage, setCurrentPage] = React.useState(1);
+    // const [currentPage, setCurrentPage] = React.useState(1);
 
 
 
@@ -37,15 +40,24 @@ const Home = () => {
         dispatch(setCategoryId(id))
     }
 
+    const onChangePage = (number) => {
+        dispatch(setPageCount(number))
+    }
+
 
     React.useEffect(() => {
         setLoading(true)
-        fetch(`https://628e5bff368687f3e715b43f.mockapi.io/pizzas?page=${currentPage}&limit=4${category}&sortBy=${sort}&order=${order}${search}`)
-            .then(response => response.json())
-            .then(data => {
-                setPizzas(data)
+        axios.get(`https://628e5bff368687f3e715b43f.mockapi.io/pizzas?page=${currentPage}&limit=4${category}&sortBy=${sort}&order=${order}${search}`)
+            .then(res => {
+                setPizzas(res.data)
                 setLoading(false)
             })
+        // fetch(`https://628e5bff368687f3e715b43f.mockapi.io/pizzas?page=${currentPage}&limit=4${category}&sortBy=${sort}&order=${order}${search}`)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         setPizzas(data)
+        //         setLoading(false)
+        //     })
         window.scrollTo(0, 0)
     }, [categoryId, sortType, searchValue, currentPage])
     return (
@@ -54,7 +66,7 @@ const Home = () => {
                 <Categories
                     onClickCategory={onChangeCategory}
                     value={categoryId} />
-                <Sort/>
+                <Sort />
 
             </div>
             <h2 className="content__title">Все пиццы</h2>
@@ -65,7 +77,7 @@ const Home = () => {
 
                 }
             </div>
-            <Pagination onChangePage={setCurrentPage}/>
+            <Pagination onChangePage={onChangePage} />
         </>
     )
 }
