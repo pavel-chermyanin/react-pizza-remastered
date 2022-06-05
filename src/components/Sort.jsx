@@ -2,27 +2,24 @@ import React from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortType } from '../redux/slices/filterSlice';
 
+export const list = [
+    { name: 'пулярности (DESC)', sortProperty: 'rating' },
+    { name: 'пулярности (ASC)', sortProperty: '-rating' },
+    { name: 'цене (DESC)', sortProperty: 'price' },
+    { name: 'цене (ASC)', sortProperty: '-price' },
+    { name: 'алфавиту (DESC)', sortProperty: 'title' },
+    { name: 'алфавиту (ASC)', sortProperty: '-title' }
+];
 
 const Sort = () => {
     const value = useSelector(state => state.filter.sort)
     const dispatch = useDispatch()
     const [isOpen, setOpen] = React.useState(false);
 
-
-    const list = [
-        { name: 'пулярности (DESC)', sort: 'rating' },
-        { name: 'пулярности (ASC)', sort: '-rating' },
-        { name: 'цене (DESC)', sort: 'price' },
-        { name: 'цене (ASC)', sort: '-price' },
-        { name: 'алфавиту (DESC)', sort: 'title' },
-        { name: 'алфавиту (ASC)', sort: '-title' }
-    ];
-
     const onClickListItem = (i) => {
         dispatch(setSortType(i));
         setOpen(false);
     }
-
 
     const sortName = value.name
 
@@ -68,7 +65,7 @@ const Sort = () => {
                             {
                                 list.map((obj, i) => (
                                     <li
-                                        className={obj.sort === value.sort ? 'active' : ''}
+                                        className={obj.sortProperty === value.sortProperty ? 'active' : ''}
                                         onClick={() => {
                                             onClickListItem(obj);
                                         }}
