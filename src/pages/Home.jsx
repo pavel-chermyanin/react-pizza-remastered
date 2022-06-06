@@ -53,7 +53,7 @@ const Home = () => {
             })
     }
 
-
+    // не сработает при первом ренедере
     React.useEffect(() => {
         if (isMounted.current) {
             const queryString = qs.stringify({
@@ -95,8 +95,6 @@ const Home = () => {
 
         isSearch.current = false
     }, [categoryId, sort.sortProperty, searchValue, currentPage])
-
-
 
 
     const pizzasItems = pizzas.map((obj, index) => <PizzaBlock key={index} {...obj} />);

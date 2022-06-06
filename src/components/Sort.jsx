@@ -15,28 +15,32 @@ const Sort = () => {
     const value = useSelector(state => state.filter.sort)
     const dispatch = useDispatch()
     const [isOpen, setOpen] = React.useState(false);
+    const sortRef = React.useRef()
 
     const onClickListItem = (i) => {
         dispatch(setSortType(i));
         setOpen(false);
     }
 
+    React.useEffect(() => {
+        const handleClickSort = (e) => {
+            if (!e.path.includes(sortRef.current) ) {
+                setOpen(false);
+            }
+        }
+        document.body.addEventListener('click', handleClickSort)
+
+        return () => {
+            document.body.removeEventListener('click', handleClickSort)
+        }
+    },[])
+    
     const sortName = value.name
-
-    const sortRef = React.useRef()
-
     return (
-        <div className="sort">
+        <div
+            ref={sortRef}
+            className="sort">
             <div
-                onClick={async () => {
-                    await setOpen((prev) => !prev);
-
-
-                    if (!isOpen) {
-                        sortRef.current?.focus()
-                    }
-
-                }}
                 className="sort__label">
                 <svg
                     width="10"
@@ -52,14 +56,14 @@ const Sort = () => {
                 </svg>
                 <b>Сортировка по:</b>
                 <span
+                    onClick={(e) => {
+                        setOpen((prev) => !prev);
+                    }}
                 >по {sortName}</span>
             </div>
             {
                 isOpen ? (
                     <div
-                        tabIndex={0}
-                        ref={sortRef}
-                        onBlur={() => setOpen(false)}
                         className="sort__popup">
                         <ul>
                             {
