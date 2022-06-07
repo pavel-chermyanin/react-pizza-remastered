@@ -9,7 +9,9 @@ const CartBlock = () => {
     const { items, totalPrice } = useSelector(state => state.cart)
 
     const onClickClearCart = () => {
-        dispatch(clearItems())
+        if (window.confirm('Очистить корзину?')) {
+            dispatch(clearItems())
+        }
     }
 
     const totalCount = items.reduce((sum, el) => sum + el.count, 0)

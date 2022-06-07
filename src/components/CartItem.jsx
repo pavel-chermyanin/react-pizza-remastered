@@ -7,7 +7,9 @@ const CartItem = ({ id, name, imageUrl, price, type, size, count }) => {
     const dispatch = useDispatch()
 
     const onClickRemoveFromCart = () => {
-        dispatch(removeItem(id))
+        if (window.confirm('Ты действительно хочешь удалить товар?')) {
+            dispatch(removeItem(id))
+        }
     }
 
     const onClickPlus = () => {
@@ -17,7 +19,7 @@ const CartItem = ({ id, name, imageUrl, price, type, size, count }) => {
         dispatch(minusItem(id))
     }
 
-    // const totalPrice = 
+
 
     return (
         <>
@@ -31,7 +33,7 @@ const CartItem = ({ id, name, imageUrl, price, type, size, count }) => {
                 </div>
                 <div className="cart__item-info">
                     <h3>{name}</h3>
-                    <p>{type} тесто, 26 см.</p>
+                    <p>{type} тесто, {size} см.</p>
                 </div>
                 <div
                     className="cart__item-count">

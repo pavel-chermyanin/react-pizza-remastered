@@ -26,11 +26,14 @@ const cartSlice = createSlice({
             const findItem = state.items.find(obj => obj.id === action.payload)
 
             if (findItem) {
-                findItem.count--
-            }
+                if (findItem.count === 1) {
+                    if (window.confirm('Вы хотите удалить товар?')) {
+                        state.items = state.items.filter(obj => obj.id !== action.payload)
+                    }
 
-            if (!findItem.count) {
-                state.items = state.items.filter(obj => obj.id !== action.payload)
+                } else {
+                    findItem.count--
+                }
             }
 
             state.totalPrice = state.items.reduce((sum, obj) => {
@@ -39,9 +42,14 @@ const cartSlice = createSlice({
         },
         removeItem(state, action) {
             state.items = state.items.filter(obj => obj.id !== action.payload)
+
+            state.totalPrice = state.items.reduce((sum, obj) => {
+                return sum + (obj.price * obj.count)
+            }, 0)
         },
         clearItems(state) {
             state.items = []
+            state.totalPrice = 0
         },
 
     },

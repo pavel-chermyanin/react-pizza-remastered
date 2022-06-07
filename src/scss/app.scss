@@ -27,6 +27,19 @@ body {
 .content {
   padding: 40px 0;
 
+  &__error {
+    text-align: center;
+    margin: 100px auto;
+    max-width: 400px;
+
+    h2 {
+      margin-bottom: 30px;
+    }
+    p{
+      font-size: 20px;
+    }
+  }
+
   &__title {
     margin: 35px 0;
   }

@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 
@@ -13,6 +12,7 @@ import Preloader from '../components/PizzaBlock/Preloader';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
 import { setCategoryId, setPageCount, setFilters } from '../redux/slices/filterSlice';
+import { fetchPizzas } from '../redux/slices/pizzasSlice';
 
 
 const Home = () => {
@@ -22,13 +22,9 @@ const Home = () => {
     const isMounted = React.useRef(false)
 
     const { categoryId, sort, currentPage } = useSelector(state => state.filter);
+    const { items, status } = useSelector(state => state.pizzas);
 
     const { searchValue } = React.useContext(SearchContext)
-
-    const [pizzas, setPizzas] = React.useState([])
-    const [isLoading, setLoading] = React.useState(true)
-
-
 
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id))
@@ -38,20 +34,27 @@ const Home = () => {
         dispatch(setPageCount(number))
     }
 
-    const fecthPizzas = () => {
-        setLoading(true)
+    const getPizzas = () => {
 
         const category = categoryId > 0 ? `&category=${categoryId}` : '';
         const sortType = sort.sortProperty.replace('-', '');
         const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
         const search = searchValue ? `&search=${searchValue}` : '';
 
-        axios.get(`https://628e5bff368687f3e715b43f.mockapi.io/pizzas?page=${currentPage}&limit=4${category}&sortBy=${sortType}&order=${order}${search}`)
-            .then(res => {
-                setPizzas(res.data)
-                setLoading(false)
-            })
+
+        dispatch(fetchPizzas({ category, sortType, order, search, currentPage }))
+
     }
+
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+
+        if (!isSearch.current) {
+            getPizzas()
+        }
+
+        isSearch.current = false
+    }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
     // не сработает при первом ренедере
     React.useEffect(() => {
@@ -62,7 +65,7 @@ const Home = () => {
                 currentPage
             })
             navigate(`?${queryString}`)
-        }   
+        }
         isMounted.current = true
     }, [categoryId, sort.sortProperty, currentPage])
 
@@ -82,22 +85,14 @@ const Home = () => {
             )
             isSearch.current = true
         }
-        
+
     }, [])
 
 
-    React.useEffect(() => {
-        window.scrollTo(0, 0)
-
-        if (!isSearch.current) {
-            fecthPizzas()
-        }
-
-        isSearch.current = false
-    }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
 
-    const pizzasItems = pizzas.map((obj, index) => <PizzaBlock key={index} {...obj} />);
+
+    const pizzasItems = items.map((obj, index) => <PizzaBlock key={index} {...obj} />);
     const skeleton = [...new Array(4)].map((_, i) => <Preloader key={i} />)
 
     return (
@@ -110,13 +105,25 @@ const Home = () => {
 
             </div>
             <h2 className="content__title">Все пиццы</h2>
-            <div className="content__items">
 
-                {
-                    !isLoading ? pizzasItems : skeleton
 
-                }
-            </div>
+            {
+                status === 'error' ? (
+                    <div className="content__error">
+                        <h2>Произошла ошибка 😕</h2>
+                        <p>
+                            К сожалению не удалось получить пиццы.<br />
+                            Попробуйте позже.
+                        </p>
+                    </div>
+                ) : (
+                    <div className="content__items">
+                        {
+                            status === 'loading' ? skeleton : pizzasItems
+                        }
+                    </div>
+                )
+            }
             <Pagination onChangePage={onChangePage} />
         </>
     )
