@@ -1,20 +1,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import {addItem} from '../../redux/slices/cartSlice'
+import { addItem, selectItemById } from '../../redux/slices/cartSlice'
 
 const typeNames = ['тонкое', 'традиционное']
 
-const PizzaBlock = ({ id, name, imageUrl, price, sizes, types,count }) => {
+const PizzaBlock = ({ id, name, imageUrl, price, sizes, types, count }) => {
 
     const dispatch = useDispatch()
 
-    const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id))
+    const cartItem = useSelector(selectItemById(id))
 
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
 
-    
+
 
     const onClickAddToCard = () => {
         const item = {
@@ -30,18 +31,20 @@ const PizzaBlock = ({ id, name, imageUrl, price, sizes, types,count }) => {
     }
     return (
         <div className="pizza-block">
-            <img
-                className="pizza-block__image"
-                src={imageUrl}
-                alt="Pizza"
-            />
-            <h4 className="pizza-block__title">{name}</h4>
+            <Link to={`pizzas/${id}`}>
+                <img
+                    className="pizza-block__image"
+                    src={imageUrl}
+                    alt="Pizza"
+                />
+                <h4 className="pizza-block__title">{name}</h4>
+            </Link>
             <div className="pizza-block__selector">
                 <ul>
                     {types.map((type, i) => (
                         <li
                             onClick={() => setActiveType(type)}
-                            className={activeType === type?'active' : ''}
+                            className={activeType === type ? 'active' : ''}
                             key={i}>{typeNames[type]}
                         </li>
                     ))}

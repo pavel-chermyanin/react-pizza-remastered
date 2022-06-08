@@ -10,8 +10,7 @@ import PizzaBlock from '../components/PizzaBlock';
 import Sort, { list } from '../components/Sort';
 import Preloader from '../components/PizzaBlock/Preloader';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
-import { setCategoryId, setPageCount, setFilters } from '../redux/slices/filterSlice';
+import { setCategoryId, setPageCount, setFilters, selectFilter } from '../redux/slices/filterSlice';
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
 
 
@@ -21,10 +20,9 @@ const Home = () => {
     const isSearch = React.useRef(false)
     const isMounted = React.useRef(false)
 
-    const { categoryId, sort, currentPage } = useSelector(state => state.filter);
+    const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
     const { items, status } = useSelector(state => state.pizzas);
 
-    const { searchValue } = React.useContext(SearchContext)
 
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id))
@@ -92,7 +90,9 @@ const Home = () => {
 
 
 
-    const pizzasItems = items.map((obj, index) => <PizzaBlock key={index} {...obj} />);
+    const pizzasItems = items.map((obj, index) => (
+            <PizzaBlock  {...obj} key={index} />
+    ));
     const skeleton = [...new Array(4)].map((_, i) => <Preloader key={i} />)
 
     return (
