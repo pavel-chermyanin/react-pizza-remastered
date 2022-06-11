@@ -6,7 +6,10 @@ import { Provider } from 'react-redux'
 
 import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElem = document.getElementById('root')
+if (rootElem) {
+const root = ReactDOM.createRoot(rootElem);
+
 root.render(
     <Provider store={store}>
       <BrowserRouter>
@@ -15,4 +18,4 @@ root.render(
     </Provider>
 );
 
-
+}

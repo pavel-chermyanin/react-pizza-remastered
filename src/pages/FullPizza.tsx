@@ -8,9 +8,15 @@ import { addItem, selectItemById } from '../redux/slices/cartSlice'
 
 const typeNames = ['тонкое', 'традиционное']
 
-const FullPizza = () => {
+const FullPizza: React.FC = () => {
 
-    const [pizza, setPizza] = useState()
+    const [pizza, setPizza] = React.useState<{
+        imageUrl: string;
+        name: string;
+        price: number;
+        types: number[];
+        sizes: number[];
+    }>()
     const { id } = useParams()
     const dispatch = useDispatch()
 
@@ -46,7 +52,7 @@ const FullPizza = () => {
     }, [])
 
     if (!pizza) {
-        return 'Загрузка...'
+        return <p>'Загрузка...'</p>
     }
 
     const { imageUrl, name, types, sizes, price } = pizza

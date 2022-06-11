@@ -32,12 +32,16 @@ const PizzaBlock = ({ id, name, imageUrl, price, sizes, types, count }) => {
     return (
         <div className="pizza-block">
             <Link to={`pizzas/${id}`}>
-                <img
-                    className="pizza-block__image"
-                    src={imageUrl}
-                    alt="Pizza"
-                />
-                <h4 className="pizza-block__title">{name}</h4>
+                <div className="pizza-block__top">
+                    <p className="pizza-block__prompt">Перейти к описанию</p>
+                    <img
+                        className="pizza-block__image"
+                        src={imageUrl}
+                        alt="Pizza"
+                    />
+                    <h4 className="pizza-block__title">{name}</h4>
+
+                </div>
             </Link>
             <div className="pizza-block__selector">
                 <ul>
