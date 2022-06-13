@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/react-pizza-remastered/static/css/main.70d4c3dc.css",
+    "main.js": "/react-pizza-remastered/static/js/main.05bd56e4.js",
+    "static/media/ProximaNova-Regular.eot": "/react-pizza-remastered/static/media/ProximaNova-Regular.d97f8f32c098b28c3ab0.eot",
+    "static/media/ProximaNova-Regular.ttf": "/react-pizza-remastered/static/media/ProximaNova-Regular.b078618b41b9b6629ea0.ttf",
+    "static/media/ProximaNova-Bold.eot": "/react-pizza-remastered/static/media/ProximaNova-Bold.787088b281e017f8c449.eot",
+    "static/media/ProximaNova-Extrabld.eot": "/react-pizza-remastered/static/media/ProximaNova-Extrabld.b9fcd9fbe4d0b5e73cbd.eot",
+    "static/media/ProximaNova-Bold.ttf": "/react-pizza-remastered/static/media/ProximaNova-Bold.7722451a8c88b6100185.ttf",
+    "static/media/ProximaNova-Extrabld.ttf": "/react-pizza-remastered/static/media/ProximaNova-Extrabld.026a945d32b05c6c8710.ttf",
+    "static/media/ProximaNova-Black.eot": "/react-pizza-remastered/static/media/ProximaNova-Black.9a114cea74aac9cc06cc.eot",
+    "static/media/ProximaNova-Black.ttf": "/react-pizza-remastered/static/media/ProximaNova-Black.5335144c30bdc79a2d6d.ttf",
+    "static/media/ProximaNova-Regular.woff": "/react-pizza-remastered/static/media/ProximaNova-Regular.99528640efded3e12591.woff",
+    "static/media/ProximaNova-Bold.woff": "/react-pizza-remastered/static/media/ProximaNova-Bold.1f267da183b3d4fe3d5b.woff",
+    "static/media/ProximaNova-Extrabld.woff": "/react-pizza-remastered/static/media/ProximaNova-Extrabld.64f095e95e4018946cb1.woff",
+    "static/media/ProximaNova-Black.woff": "/react-pizza-remastered/static/media/ProximaNova-Black.131eab64b8a971a4fc73.woff",
+    "static/media/empty-cart.png": "/react-pizza-remastered/static/media/empty-cart.db905d1f4b063162f25b.png",
+    "static/media/pizza-logo.svg": "/react-pizza-remastered/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg",
+    "index.html": "/react-pizza-remastered/index.html",
+    "main.70d4c3dc.css.map": "/react-pizza-remastered/static/css/main.70d4c3dc.css.map",
+    "main.05bd56e4.js.map": "/react-pizza-remastered/static/js/main.05bd56e4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.70d4c3dc.css",
+    "static/js/main.05bd56e4.js"
+  ]
+}
