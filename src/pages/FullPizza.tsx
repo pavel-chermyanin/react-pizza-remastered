@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { addItem, selectItemById } from '../redux/slices/cartSlice'
@@ -11,16 +11,17 @@ const typeNames = ['тонкое', 'традиционное']
 const FullPizza: React.FC = () => {
 
     const [pizza, setPizza] = React.useState<{
+        id: string
         imageUrl: string;
         name: string;
         price: number;
         types: number[];
         sizes: number[];
     }>()
-    const { id } = useParams()
+    const { id }  = useParams()
     const dispatch = useDispatch()
 
-    const cartItem = useSelector(selectItemById(id))
+    const cartItem = useSelector(selectItemById(id || '0'))
 
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
@@ -28,13 +29,14 @@ const FullPizza: React.FC = () => {
 
     const onClickAddToCard = () => {
         const item = {
-            id,
-            name,
-            imageUrl,
-            price,
-            type: typeNames[activeType],
-            size: sizes[activeSize]
-        }
+          id: id || '0',
+          name,
+          imageUrl,
+          price,
+          type: typeNames[activeType],
+          size: sizes[activeSize],
+          count: 0
+        };
         dispatch(addItem(item))
 
     }

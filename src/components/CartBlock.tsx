@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { clearItems, selectCart } from '../redux/slices/cartSlice';
 import CartItem from './CartItem'
 
-const CartBlock = () => {
+const CartBlock: React.FC = () => {
     const dispatch = useDispatch()
     const { items, totalPrice } = useSelector(selectCart)
 
@@ -16,7 +16,7 @@ const CartBlock = () => {
         }
     }
 
-    const totalCount = items.reduce((sum, el) => sum + el.count, 0)
+    const totalCount = items.reduce((sum: number, el: any) => sum + el.count, 0)
 
     return (
         <>
@@ -46,7 +46,7 @@ const CartBlock = () => {
             </div>
             <div className="cart__items">
                 {
-                    items.map(obj => (
+                    items.map((obj: any) => (
                         <CartItem {...obj} key={obj.id} />
                     ))
                 }

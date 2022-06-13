@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux'
 import CartBlock from '../components/CartBlock'
 
 import CartEmpty from '../components/CartEmpty'
+import { selectCart } from '../redux/slices/cartSlice'
 
 
-const Cart = () => {
-  const items = useSelector(state => state.cart.items)
+const Cart: React.FC = () => {
+  const {items} = useSelector(selectCart);
 
   return (
     <>

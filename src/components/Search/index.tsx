@@ -6,11 +6,11 @@ import { setSearchValue } from '../../redux/slices/filterSlice';
 
 import styles from './Search.module.scss'
 
-const Search = () => {
+const Search: React.FC = () => {
     const dispatch = useDispatch()
 
-    const inputRef = useRef()
-    const [inputValue, setInputValue] = React.useState('')
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [inputValue, setInputValue] = React.useState<string>('')
 
     const updateSearchValue = React.useCallback(
         debounce(str => {
@@ -22,9 +22,11 @@ const Search = () => {
     const onClickClear = () => {
         setInputValue('')
         dispatch(setSearchValue(''))
-        inputRef.current.focus()
+        
+        // если нода есть, то применить фокус()
+        inputRef.current?.focus()
     }
-    const onChangeInput = (e) => {
+    const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
         updateSearchValue(e.target.value)
     }

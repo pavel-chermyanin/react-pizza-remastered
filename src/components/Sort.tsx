@@ -1,22 +1,24 @@
 import React from "react"
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSort, setSortType } from '../redux/slices/filterSlice';
+import { selectSort, setSortType, SortEnum } from '../redux/slices/filterSlice';
 
 type SortItem = {
-    name: string;
-    sortProperty: string;
-}
+  name: string;
+  sortProperty: SortEnum
+};
+
+type PopupClick = MouseEvent & {path: Node[]}
 
 export const list: SortItem[] = [
-    { name: 'пулярности (DESC)', sortProperty: 'rating' },
-    { name: 'пулярности (ASC)', sortProperty: '-rating' },
-    { name: 'цене (DESC)', sortProperty: 'price' },
-    { name: 'цене (ASC)', sortProperty: '-price' },
-    { name: 'алфавиту (DESC)', sortProperty: 'title' },
-    { name: 'алфавиту (ASC)', sortProperty: '-title' },
+  { name: "пулярности (DESC)", sortProperty: SortEnum.RATING_DESC },
+  { name: "пулярности (ASC)", sortProperty: SortEnum.RATING_ASC },
+  { name: "цене (DESC)", sortProperty: SortEnum.PRICE_DESC },
+  { name: "цене (ASC)", sortProperty: SortEnum.PRICE_ASC },
+  { name: "алфавиту (DESC)", sortProperty: SortEnum.TITLE_DESC },
+  { name: "алфавиту (ASC)", sortProperty: SortEnum.TITLE_ASC },
 ];
 
-const Sort = () => {
+const SortPopup = () => {
     const value = useSelector(selectSort)
     const dispatch = useDispatch()
     const [isOpen, setOpen] = React.useState(false);
@@ -28,9 +30,10 @@ const Sort = () => {
     }
 
     React.useEffect(() => {
-        const handleClickSort = (e: any) => {
-            if (!e.path.includes(sortRef.current) ) {
-                setOpen(false);
+        const handleClickSort = (event: MouseEvent) => {
+            const _event = event as PopupClick;
+            if (sortRef.current && !_event.path.includes(sortRef.current)) {
+              setOpen(false);
             }
         }
         document.body.addEventListener('click', handleClickSort)
@@ -91,4 +94,4 @@ const Sort = () => {
     )
 }
 
-export default Sort
+export default SortPopup

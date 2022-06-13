@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from "react-content-loader"
 
-const Preloader = () => {
+const Preloader: React.FC = () => {
   return (
       <ContentLoader
           className="pizza-block"
