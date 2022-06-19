@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import img from '../assets/img/pizza-logo.svg';
 import { selectCart } from "../redux/slices/cartSlice";
@@ -9,7 +9,8 @@ const Header = () => {
     const { items, totalPrice } = useSelector(selectCart)
 
     const totalCount = items.reduce((sum: number, el: any) => sum + el.count, 0)
-    
+    const location = useLocation()
+    console.log(location);
     return (
         <div className="header">
             <div className="container">
@@ -20,7 +21,7 @@ const Header = () => {
                         <p>самая вкусная пицца во вселенной</p>
                     </div>
                 </NavLink>
-                <Search />
+                {location.pathname !== '/cart' && <Search />}
                     
                 <div className="header__cart">
                     <NavLink to="/cart" className="button button--cart">

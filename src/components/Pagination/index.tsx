@@ -10,7 +10,6 @@ type PaginationProps = {
 
 const Pagination: React.FC<PaginationProps> = memo(
   ({ currentPage, onChangePage }) => {
-    console.log(currentPage);
     return (
       <ReactPaginate
         className={styles.root}

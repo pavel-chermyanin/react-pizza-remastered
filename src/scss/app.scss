@@ -276,6 +276,16 @@ body {
             display: none;
           }
         }
+
+        &--disabled{
+          pointer-events: none;
+          border-color: #777777;
+          opacity: 0.4;
+
+          svg path{
+            fill: #777777
+          }
+        }
       }
 
       b {

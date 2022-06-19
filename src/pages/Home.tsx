@@ -15,7 +15,11 @@ import {
   selectFilter,
   FilterSLiceState,
 } from "../redux/slices/filterSlice";
-import { fetchPizzas, SearchPizzaParams, selectPizza } from "../redux/slices/pizzasSlice";
+import {
+  fetchPizzas,
+  SearchPizzaParams,
+  selectPizza,
+} from "../redux/slices/pizzasSlice";
 import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
@@ -28,9 +32,9 @@ const Home: React.FC = () => {
     useSelector(selectFilter);
   const { items, status } = useSelector(selectPizza);
 
-  const onChangeCategory = (idx: number) => {
+  const onChangeCategory = React.useCallback((idx: number) => {
     dispatch(setCategoryId(idx));
-  };
+  }, []);
 
   const onChangePage = React.useCallback((numberValue: number) => {
     dispatch(setPageCount(numberValue));
@@ -85,13 +89,12 @@ const Home: React.FC = () => {
 
       const sort = list.find((obj) => obj.sortProperty === params.sortType);
 
-    
       dispatch(
         setFilters({
-            searchValue: params.search,
-            categoryId: Number(params.category),
-            currentPage: Number(params.currentPage),
-            sort: sort || list[0]
+          searchValue: params.search,
+          categoryId: Number(params.category),
+          currentPage: Number(params.currentPage),
+          sort: sort || list[0],
         })
       );
       isSearch.current = true;
@@ -107,7 +110,7 @@ const Home: React.FC = () => {
     <>
       <div className="content__top">
         <Categories onClickCategory={onChangeCategory} value={categoryId} />
-        <Sort />
+        <Sort value={sort}/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
 
