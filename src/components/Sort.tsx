@@ -1,6 +1,5 @@
 import React from "react"
-import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSortType, SortEnum } from '../redux/slices/filterSlice';
 
 type SortItem = {
@@ -26,7 +25,6 @@ export const list: SortItem[] = [
 
 
 const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
-  useWhyDidYouUpdate("SortPopup", {value});
   const dispatch = useDispatch();
   const [isOpen, setOpen] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);

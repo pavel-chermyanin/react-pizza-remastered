@@ -15,6 +15,7 @@ export type PizzaBlockProps = {
   types: number[];
   sizes: number[];
   count: number;
+  // key?: number;
 };
 
 const PizzaBlock: React.FC<PizzaBlockProps> = ({

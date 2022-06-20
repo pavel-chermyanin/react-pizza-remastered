@@ -1,19 +1,23 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import qs from "qs";
 
-import Categories from "../components/Categories";
-import PizzaBlock from "../components/PizzaBlock";
-import Sort, { list } from "../components/Sort";
-import Preloader from "../components/PizzaBlock/Preloader";
-import Pagination from "../components/Pagination";
+import {
+  Categories,
+  PizzaBlock,
+  Sort,
+  Pagination,
+  Preloader,
+} from "../components";
+import { list } from "../components/Sort";
+// import Preloader from "../components/PizzaBlock/Preloader";
+
 import {
   setCategoryId,
   setPageCount,
   setFilters,
   selectFilter,
-  FilterSLiceState,
 } from "../redux/slices/filterSlice";
 import {
   fetchPizzas,
@@ -110,7 +114,7 @@ const Home: React.FC = () => {
     <>
       <div className="content__top">
         <Categories onClickCategory={onChangeCategory} value={categoryId} />
-        <Sort value={sort}/>
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
 
