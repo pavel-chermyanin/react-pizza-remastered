@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_pizza_remastered=self.webpackChunkreact_pizza_remastered||[]).push([[72],{8303:function(e,r,t){t.r(r);t(2791);var a=t(9434),s=t(7784),n=t(1740),u=t(184);r.default=function(){var e=(0,a.v9)(n.KY).items;return(0,u.jsx)(u.Fragment,{children:e.length>0?(0,u.jsx)(s.iv,{}):(0,u.jsx)(s.uZ,{})})}}}]);
+//# sourceMappingURL=Cart.726aff4b.chunk.js.map
